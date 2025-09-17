@@ -40,7 +40,7 @@ class AdminColumns {
 			case 'price':
 				$price = get_post_meta( $post_id, 'price', true );
 				$label = get_post_meta( $post_id, 'custom_price_label', true );
-				echo $label ?: esc_html( $price );
+				echo esc_html($label) ?: esc_html( $price );
 				break;
 		}
 	}

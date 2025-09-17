@@ -59,7 +59,7 @@ abstract class MetaBox {
 			return;
 		}
 		if ( ! isset( $_POST[ $this->nonce_name() ] ) ||
-		     ! wp_verify_nonce( $_POST[ $this->nonce_name() ], $this->nonce_action() ) ) {
+		     ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST[ $this->nonce_name() ] ) ), $this->nonce_action() ) ) {
 			return;
 		}
 

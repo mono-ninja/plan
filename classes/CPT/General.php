@@ -60,9 +60,9 @@ class General extends MetaBox {
 	}
 
 	public function save( int $post_id ): void {
-		update_post_meta( $post_id, 'price', sanitize_text_field( $_POST['price'] ?? '' ) );
-		update_post_meta( $post_id, 'custom_price_label', sanitize_text_field( $_POST['custom_price_label'] ?? '' ) );
-		update_post_meta( $post_id, 'button_text', sanitize_text_field( $_POST['button_text'] ?? '' ) );
-		update_post_meta( $post_id, 'button_link', esc_url_raw( $_POST['button_link'] ?? '' ) );
+		update_post_meta( $post_id, 'price', sanitize_text_field( wp_unslash( $_POST['price'] ?? '' ) ) ); // phpcs:ignore WordPress.Security.NonceVerification.Missing
+		update_post_meta( $post_id, 'custom_price_label', sanitize_text_field( wp_unslash( $_POST['custom_price_label'] ?? '' ) ) ); // phpcs:ignore WordPress.Security.NonceVerification.Missing
+		update_post_meta( $post_id, 'button_text', sanitize_text_field( wp_unslash( $_POST['button_text'] ?? '' ) ) ); // phpcs:ignore WordPress.Security.NonceVerification.Missing
+		update_post_meta( $post_id, 'button_link', esc_url_raw( wp_unslash( $_POST['button_link'] ?? '' ) ) ); // phpcs:ignore WordPress.Security.NonceVerification.Missing
 	}
 }

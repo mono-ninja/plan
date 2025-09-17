@@ -49,8 +49,8 @@ class Features extends MetaBox {
 	}
 
 	public function save( int $post_id ): void {
-		if ( isset( $_POST['features'] ) && is_array( $_POST['features'] ) ) {
-			$features = array_filter( array_map( 'sanitize_text_field', $_POST['features'] ) );
+		if ( isset( $_POST['features'] ) && is_array( wp_unslash( $_POST['features'] ) ) ) {
+			$features = array_filter( array_map( 'sanitize_text_field', wp_unslash($_POST['features'] )) ); // phpcs:ignore WordPress.Security.NonceVerification.Missing
 			update_post_meta( $post_id, 'features', $features );
 		} else {
 			delete_post_meta( $post_id, 'features' );

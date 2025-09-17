@@ -124,13 +124,8 @@ if ( ! class_exists( 'Plan' ) ) :
 		 * @return void
 		 */
 		public function loaded(): void {
-
 			new Core();
 			new CPT();
-
-			$languages_folder = dirname( plugin_basename( __FILE__ ) ) . '/languages/';
-			load_plugin_textdomain( 'plan', false, $languages_folder );
-
 		}
 	}
 
