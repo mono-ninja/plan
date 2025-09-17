@@ -1,0 +1,30 @@
+#plan-features-list {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+#plan-features-list .feature-item {
+	display: flex;
+	align-items: center;
+	margin-bottom: 6px;
+	background: #fff;
+	border: 1px solid #ccc;
+	padding: 4px;
+}
+#plan-features-list .handle {
+	cursor: grab;
+	margin-right: 6px;
+}
+#plan-features-list .feature-item.dragging {
+	opacity: 0.5;
+}
+
+#plan-features-list .remove-feature {
+	display: flex;
+	align-items: center;
+}
+
+#plan-features-list .input-feature {
+	max-width: 450px;
+	width: 100%;
+}
