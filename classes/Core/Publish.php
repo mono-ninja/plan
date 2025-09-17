@@ -42,10 +42,12 @@ class Publish {
 		ob_start();
 		echo '<section class="plans-wrapper">';
 		echo '<div class="screen-reader-text">' . esc_html__( 'Price Plans', 'plan' ) . '</div>';
-        echo '<div class="plans-switcher-box"><div class="plans-switcher">';
-        echo '<label class="switch"><input type="checkbox" id="plan-toggle"><span class="slider"></span></label>
-	            <span class="label">'.esc_html__('Show annual plans', 'plan').'</span>';
-        echo '</div></div>';
+		if ( $this->has_annual_enabled( $query ) ) {
+			echo '<div class="plans-switcher-box"><div class="plans-switcher">';
+			echo '<label class="switch"><input type="checkbox" id="plan-toggle"><span class="slider"></span></label>
+	            <span class="label">' . esc_html__( 'Show annual plans', 'plan' ) . '</span>';
+			echo '</div></div>';
+		}
 		echo '<div class="plans-box">';
 		while ( $query->have_posts() ) {
 			$query->the_post();
@@ -110,6 +112,23 @@ class Publish {
 
 		return ob_get_clean();
 
+	}
+
+	private function has_annual_enabled( \WP_Query $query ): bool {
+		if ( empty( $query->posts ) ) {
+			return false;
+		}
+
+		foreach ( $query->posts as $plan_post ) {
+			$is_annual  = (bool) get_post_meta( $plan_post->ID, 'is_annual', true );
+			$is_enabled = (bool) get_post_meta( $plan_post->ID, 'is_enabled', true );
+
+			if ( $is_annual && $is_enabled ) {
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	public function enqueue_scripts(): void {
